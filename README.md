@@ -9,8 +9,8 @@ GoMark is a scalable backend configuration engine designed to manage HubSpot dea
 
 ### **Prerequisites**
 - Golang (1.20+)
-- Docker & Docker Compose
-
+- Docker & Docker Compose & dockerhub access
+- Kubernetes
 ### **Setup & Execution**
 
 #### **Clone the Repository**
