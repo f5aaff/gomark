@@ -1,0 +1,16 @@
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: gomark-ingress
+spec:
+  rules:
+  - host: gomark.example.com
+    http:
+      paths:
+      - path: /
+        pathType: Prefix
+        backend:
+          service:
+            name: gomark-loadbalancer
+            port:
+              number: 80

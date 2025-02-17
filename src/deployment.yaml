@@ -1,0 +1,36 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: gomark-backend
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      app: gomark-backend
+  template:
+    metadata:
+      labels:
+        app: gomark-backend
+    spec:
+      containers:
+      - name: gomark-backend
+        image: your-dockerhub-username/gomark-backend:latest
+        ports:
+        - containerPort: 8080
+        env:
+        - name: REDIS_HOST
+          value: "redis-service"
+        - name: DATABASE_URL
+          value: "postgres://user:password@db-service:5432/gomark"
+        readinessProbe:
+          httpGet:
+            path: /health
+            port: 8080
+          initialDelaySeconds: 5
+          periodSeconds: 10
+        livenessProbe:
+          httpGet:
+            path: /health
+            port: 8080
+          initialDelaySeconds: 10
+          periodSeconds: 10
